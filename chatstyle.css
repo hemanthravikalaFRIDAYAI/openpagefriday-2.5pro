@@ -1,0 +1,241 @@
+/* === Chatbot Container === */
+.chat-container {
+    width: 100%;
+    max-width: 550px;
+    margin: 20px auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    overflow: hidden;
+}
+
+/* === Header === */
+.chat-header {
+    background: #28a745;
+    color: white;
+    padding: 16px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+/* === Chat Messages Area === */
+.chat-messages {
+    flex: 1;
+    padding: 15px;
+    background: #f9fafb;
+    overflow-y: auto;
+    max-height: 400px; /* Keeps the chat scrollable */
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* Scrollbar Styling */
+.chat-messages::-webkit-scrollbar {
+    width: 8px;
+}
+.chat-messages::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+/* === Message Bubbles === */
+.message {
+    display: inline-block;
+    max-width: 85%;
+    padding: 12px 14px;
+    border-radius: 12px;
+    font-size: 15px;
+    line-height: 1.6;
+    white-space: normal;          /* FIX: allows wrapping */
+    word-wrap: break-word;        /* FIX: breaks long words */
+    overflow-wrap: break-word;    /* FIX: no horizontal overflow */
+    text-align: left;
+    background: #f1f1f1;
+}
+
+/* Bot message */
+.bot-message {
+    background: #e6e6e6;
+    color: #333;
+    align-self: flex-start;
+}
+
+/* User message */
+.user-message {
+    background: #28a745;
+    color: #fff;
+    align-self: flex-end;
+}
+
+/* === Markdown Styling for Bot Response === */
+.bot-message h1, .bot-message h2, .bot-message h3 {
+    font-size: 16px;
+    margin: 8px 0;
+    font-weight: bold;
+}
+.bot-message ul {
+    margin: 8px 0;
+    padding-left: 20px;
+}
+.bot-message li {
+    list-style: disc;
+}
+.bot-message strong {
+    font-weight: bold;
+}
+.bot-message em {
+    font-style: italic;
+}
+.bot-message code {
+    background: #f4f4f4;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-family: monospace;
+}
+
+/* === Input Area === */
+.input-container {
+    display: flex;
+    padding: 12px;
+    border-top: 1px solid #ddd;
+    background: #fff;
+    gap: 8px;
+}
+
+.input-container input {
+    flex: 1;
+    padding: 12px 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+}
+
+.input-container button {
+    padding: 12px 18px;
+    border: none;
+    background: #28a745;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.input-container button:hover {
+    background: #218838;
+}
+
+/* Clear button (styled differently) */
+.clear-btn-chat {
+    background: #dc3545;
+}
+
+.clear-btn-chat:hover {
+    background: #b02a37;
+}
+
+/* === Responsive Design === */
+@media (max-width: 600px) {
+    .chat-container {
+        max-width: 100%;
+        margin: 10px;
+    }
+}
+
+
+
+.bot-message::before {
+    content: "🤖";
+    margin-right: 8px;
+}
+.user-message::after {
+    content: "👤";
+    margin-left: 8px;
+}
+
+#chat-input {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    margin-right: 10px;
+    font-size: 1em;
+    outline: none;
+    transition: border-color 0.3s;
+}
+#chat-input:focus {
+    border-color: #28a745;
+}
+#send-btn {
+    padding: 12px 25px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background 0.3s;
+}
+#send-btn:hover {
+    background: #218838;
+}
+.audio-player {
+    display: none;
+    padding: 10px;
+    background: #f0f0f0;
+    border-top: 1px solid #ddd;
+    text-align: center;
+}
+.audio-player.active {
+    display: block;
+}
+#audio-player {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    display: block;
+}
+.song-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+.audio-controls {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+.audio-controls button {
+    padding: 8px 15px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.audio-controls button:hover {
+    background: #218838;
+}
+.timer-display {
+    padding: 10px;
+    background: #f0f0f0;
+    border-top: 1px solid #ddd;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+    display: none;
+}
+.timer-display.active {
+    display: block;
+}
+
+
