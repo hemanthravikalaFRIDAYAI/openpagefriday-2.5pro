@@ -784,11 +784,14 @@ class FridayChatbot {
 
     async callAI(userMessage) {
     try {
-        // Call your Render backend
         const response = await fetch('https://openpagefriday-2-5pro.onrender.com/api/chat', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: userMessage })
+            body: JSON.stringify({
+                messages: [
+                    { role: "user", content: userMessage }
+                ]
+            })
         });
 
         if (!response.ok) {
@@ -797,8 +800,8 @@ class FridayChatbot {
 
         const data = await response.json();
 
-        // Return the AI reply
-        return data.reply || "Sorry, I couldn't get a response.";
+        // ✅ Extract AI response correctly
+        return data.choices?.[0]?.message?.content || "Sorry, I couldn't get a response.";
     } catch (error) {
         console.error('Error calling Render API:', error);
         return "Something went wrong. Please try again later.";
@@ -933,5 +936,6 @@ chatInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') handleInput();
 });
 clearBtn.addEventListener('click', clearConversation);
+
 
 
