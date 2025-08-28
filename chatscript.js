@@ -256,13 +256,17 @@ class FridayChatbot {
         const transcriptLower = transcript.toLowerCase();
 
         // If query starts with "friday," or "friday what"
-        if (transcriptLower.startsWith("friday,")) {
-            const question = transcript.replace(/^friday,/, "").trim();
-            const aiResponse = await this.callAI(question);
-            return {
-                 text: this.markdownToHtml(aiResponse) 
-            }
-        }
+       // Use regex to match multiple prefixes case-insensitively
+const wakeWordRegex = /^(friday|fri|ai),/i;
+
+if (wakeWordRegex.test(transcriptLower)) {
+    const question = transcript.replace(wakeWordRegex, "").trim();
+    const aiResponse = await this.callAI(question);
+    return {
+        text: this.markdownToHtml(aiResponse)
+    };
+}
+
 
         
         // Clear any existing context timeout
@@ -936,6 +940,7 @@ chatInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') handleInput();
 });
 clearBtn.addEventListener('click', clearConversation);
+
 
 
 
