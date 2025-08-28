@@ -263,7 +263,7 @@ if (wakeWordRegex.test(transcriptLower)) {
     const question = transcript.replace(wakeWordRegex, "").trim();
     const aiResponse = await this.callAI(question);
     return {
-        text: this.markdownToHtml(aiResponse)
+        text: this.downToHtml(aiResponse)
     };
 }
 
@@ -814,13 +814,26 @@ if (wakeWordRegex.test(transcriptLower)) {
 
 
 
-markdownToHtml(text) {
+function markdownToHtml(text) {
     return text
-        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')  // Bold
-        .replace(/\*(.*?)\*/g, '<em>$1</em>')             // Italic
-        .replace(/`(.*?)`/g, '<code>$1</code>')           // Inline code
-        .replace(/\n/g, '<br>');                          // Line breaks
+        // Code blocks (triple backticks)
+        .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
+        // Inline code (single backtick)
+        .replace(/`([^`]+)`/g, '<code>$1</code>')
+        // Bold (**text**)
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        // Italic (*text*)
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        // Ordered lists
+        .replace(/^\d+\.\s+(.*)$/gm, '<li>$1</li>')
+        // Unordered lists
+        .replace(/^\-\s+(.*)$/gm, '<li>$1</li>')
+        // Wrap lists in <ol> or <ul>
+        .replace(/(<li>.*<\/li>)/gs, '<ol>$1</ol>')
+        // Line breaks
+        .replace(/\n/g, '<br>');
 }
+
 
 
     solveMath(expression) {
