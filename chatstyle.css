@@ -1,7 +1,7 @@
 /* === Chatbot Container === */
 .chat-container {
     width: 100%;
-    max-width: 750px;
+    
     margin: 20px auto;
     background: #ffffff;
     border-radius: 12px;
@@ -237,6 +237,7 @@
 .timer-display.active {
     display: block;
 }
+
 
 
 
