@@ -263,7 +263,8 @@ if (wakeWordRegex.test(transcriptLower)) {
     const question = transcript.replace(wakeWordRegex, "").trim();
     const aiResponse = await this.callAI(question);
     return {
-        text: this.downToHtml(aiResponse)
+        text: this.markdownToHtml(aiResponse)
+
     };
 }
 
@@ -950,6 +951,7 @@ chatInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') handleInput();
 });
 clearBtn.addEventListener('click', clearConversation);
+
 
 
 
