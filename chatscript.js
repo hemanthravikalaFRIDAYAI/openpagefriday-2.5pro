@@ -814,11 +814,22 @@ if (wakeWordRegex.test(transcriptLower)) {
 
 
 
-import { marked } from 'marked';
-
 function markdownToHtml(text) {
-    return marked(text);
+    return text
+        // Inline code with multiple lines allowed (your case)
+        .replace(/`([^`]+)`/g, '<pre><code>$1</code></pre>')
+        // Bold
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        // Italic
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        // Ordered list items
+        .replace(/^\d+\.\s+(.*)$/gm, '<li>$1</li>')
+        // Wrap all <li> in <ol>
+        .replace(/(<li>.*<\/li>)/gs, '<ol>$1</ol>')
+        // Line breaks for normal text
+        .replace(/\n/g, '<br>');
 }
+
 
 
 
@@ -939,6 +950,7 @@ chatInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') handleInput();
 });
 clearBtn.addEventListener('click', clearConversation);
+
 
 
 
