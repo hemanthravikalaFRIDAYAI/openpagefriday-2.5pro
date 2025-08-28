@@ -265,7 +265,7 @@ class FridayChatbot {
             text: this.markdownToHtml(aiResponse)  // ✅ Uses marked for proper rendering
         };
     }
-}
+
 
 
         
@@ -940,6 +940,7 @@ chatInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') handleInput();
 });
 clearBtn.addEventListener('click', clearConversation);
+
 
 
 
