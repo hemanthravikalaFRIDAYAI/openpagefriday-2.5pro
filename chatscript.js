@@ -814,7 +814,7 @@ if (wakeWordRegex.test(transcriptLower)) {
 
 
 
-function markdownToHtml(text) {
+markdownToHtml(text) {
     return text
         // Inline code with multiple lines allowed (your case)
         .replace(/`([^`]+)`/g, '<pre><code>$1</code></pre>')
@@ -950,6 +950,7 @@ chatInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') handleInput();
 });
 clearBtn.addEventListener('click', clearConversation);
+
 
 
 
