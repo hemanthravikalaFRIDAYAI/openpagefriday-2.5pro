@@ -251,21 +251,20 @@ class FridayChatbot {
         document.getElementById('repeat-btn-chat').addEventListener('click', () => this.toggleRepeat());
     }
 
-    async processInput(input) {
-        const transcript = input.trim();
-        const transcriptLower = transcript.toLowerCase();
+   async processInput(input) {
+    const transcript = input.trim();
+    const transcriptLower = transcript.toLowerCase();
 
-        // If query starts with "friday," or "friday what"
-       // Use regex to match multiple prefixes case-insensitively
-const wakeWordRegex = /^(friday|fri|ai),/i;
+    // Match wake words
+    const wakeWordRegex = /^(friday|fri|ai),/i;
 
-if (wakeWordRegex.test(transcriptLower)) {
-    const question = transcript.replace(wakeWordRegex, "").trim();
-    const aiResponse = await this.callAI(question);
-    return {
-        text: this.markdownToHtml(aiResponse)
-
-    };
+    if (wakeWordRegex.test(transcriptLower)) {
+        const question = transcript.replace(wakeWordRegex, "").trim();
+        const aiResponse = await this.callAI(question);
+        return {
+            text: this.markdownToHtml(aiResponse)  // ✅ Uses marked for proper rendering
+        };
+    }
 }
 
 
@@ -815,13 +814,11 @@ if (wakeWordRegex.test(transcriptLower)) {
 
 
 
- function markdownToHtml(text) {
-      // Convert Markdown to HTML with marked
-      const rawHtml = marked.parse(text || '');
+markdownToHtml(text) {
+    // Use marked.js for proper Markdown parsing
+    return marked.parse(text);
+}
 
-      // Sanitize HTML to prevent XSS using DOMPurify
-      return DOMPurify.sanitize(rawHtml);
-    }
 
 
 
@@ -943,6 +940,7 @@ chatInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') handleInput();
 });
 clearBtn.addEventListener('click', clearConversation);
+
 
 
 
